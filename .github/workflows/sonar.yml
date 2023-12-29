@@ -39,11 +39,11 @@ jobs:
       - name: Check SonarQube results
         run: |
           COVER=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions&metricKeys=coverage" | jq -r '.component.measures[0].value')
-           if (( $(echo "COVER < 80.0" | bc -l) )); then
+          if [ "$COBERTURA" -lt 80 ]; then
             echo "Aplicação com menos de 80% coverage."
             exit 1
           else
-            echo "COVER"
+            echo "$COVER"
           fi
           DUPLICATED=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions&metricKeys=duplicated_lines_density" | jq -r '.component.measures[0].value')
           if (( $(echo "DUPLICATED > 3.0" | bc -l) )); then
