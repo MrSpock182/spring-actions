@@ -41,7 +41,12 @@ jobs:
           SONAR_URL="https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions"
           
           COVER=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "$SONAR_URL&metricKeys=coverage" | jq -r '.component.measures[0].value')
-          echo "$COVER"
+          if (( $(echo "COVER < 80.0" | bc -l) )); then
+            echo "$COVER"
+          else
+            echo "Nao foi"
+          fi
+          
           
           CODE_SMELL=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "$SONAR_URL&metricKeys=code_smells" | jq -r '.component.measures[0].value')
           if [ "$CODE_SMELL" -gt 10 ]; then
