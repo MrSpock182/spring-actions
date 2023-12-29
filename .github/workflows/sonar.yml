@@ -39,15 +39,11 @@ jobs:
       - name: Check SonarQube results
         run: |
           SONAR_URL="https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions"
-          
           COVER=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "$SONAR_URL&metricKeys=coverage" | jq -r '.component.measures[0].value')
           if (( $(echo "COVER > 80.0" | bc -l) )); then
-            echo "$COVER"
-          else
-            echo "Nao foi"
+            echo "Aplicação com menos de 80% de coverage."
+            exit 1
           fi
-          
-          
           CODE_SMELL=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "$SONAR_URL&metricKeys=code_smells" | jq -r '.component.measures[0].value')
           if [ "$CODE_SMELL" -gt 10 ]; then
             echo "Aplicação com mais de 10 code small."
