@@ -38,10 +38,11 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MrSpock182_spring-actions
       - name: Check SonarQube results
         run: |
-          NUM_BUGS=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: ${{ secrets.SONAR_URL }}-&metricKeys=bugs | jq -r '.component.measures[0].value')
-          DUPLICATED=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: ${{ secrets.SONAR_URL }}-&metricKeys=duplicated_lines_density" | jq -r '.component.measures[0].value')
-          COVER=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: ${{ secrets.SONAR_URL }}-&metricKeys=coverage" | jq -r '.component.measures[0].value')
-          CODE_SMELL=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: ${{ secrets.SONAR_URL }}-&metricKeys=code_smells" | jq -r '.component.measures[0].value')
+          URL=https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions
+          NUM_BUGS=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: URL+&metricKeys=bugs | jq -r '.component.measures[0].value')
+          DUPLICATED=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: URL+&metricKeys=duplicated_lines_density" | jq -r '.component.measures[0].value')
+          COVER=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: URL+&metricKeys=coverage" | jq -r '.component.measures[0].value')
+          CODE_SMELL=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: URL+&metricKeys=code_smells" | jq -r '.component.measures[0].value')
           if [ "$NUM_BUGS" -gt 1 ]; then
               echo "Mais de 1 bugs encontrados. O workflow será bloqueado."
               exit 1
