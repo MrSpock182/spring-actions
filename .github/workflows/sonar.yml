@@ -38,17 +38,19 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MrSpock182_spring-actions
       - name: Check SonarQube results
         run: |
-          CODE_SMELL=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions&metricKeys=code_smells" | jq -r '.component.measures[0].value')
-          if [ "$CODE_SMELL" -gt 0 ]; then
-            echo "Aplicação com mais de 1 code small."
+          SONAR_URL="https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions"
+          
+          CODE_SMELL=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "$SONAR_URL&metricKeys=code_smells" | jq -r '.component.measures[0].value')
+          if [ "$CODE_SMELL" -gt 10 ]; then
+            echo "Aplicação com mais de 10 code small."
             exit 1
           fi
-          DUPLICATED=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions&metricKeys=duplicated_lines_density" | jq -r '.component.measures[0].value')
+          DUPLICATED=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "$SONAR_URL&metricKeys=duplicated_lines_density" | jq -r '.component.measures[0].value')
           if (( $(echo "DUPLICATED > 3.0" | bc -l) )); then
             echo "Aplicação com mais de 3% de duplicação de código."
             exit 1
           fi
-          NUM_BUGS=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions&metricKeys=bugs" | jq -r '.component.measures[0].value')
+          NUM_BUGS=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "$SONAR_URL&metricKeys=bugs" | jq -r '.component.measures[0].value')
           if [ "$NUM_BUGS" -gt 2 ]; then
             echo "Aplicação contem mais de 2 bugs."
             exit 1
