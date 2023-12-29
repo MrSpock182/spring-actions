@@ -38,12 +38,10 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MrSpock182_spring-actions
       - name: Check SonarQube results
         run: |
-          COVER=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions&metricKeys=coverage" | jq -r '.component.measures[0].value')
-          if [ "$COVER" -lt 80 ]; then
-            echo "Aplicação com menos de 80% coverage."
+          CODE_SMELL=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions&metricKeys=code_smells" | jq -r '.component.measures[0].value')
+          if [ "$CODE_SMELL" -gt 0 ]; then
+            echo "Aplicação com mais de 1 code small."
             exit 1
-          else
-            echo "$COVER"
           fi
           DUPLICATED=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions&metricKeys=duplicated_lines_density" | jq -r '.component.measures[0].value')
           if (( $(echo "DUPLICATED > 3.0" | bc -l) )); then
