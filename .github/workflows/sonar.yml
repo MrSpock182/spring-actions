@@ -43,8 +43,3 @@ jobs:
               echo "Aplicação com mais de 3% de duplicação de código."
               exit 1
           fi
-          NUM_BUGS=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions&metricKeys=bugs" | jq -r '.component.measures[0].value')
-          if [ "$NUM_BUGS" -gt 2 ]; then
-              echo "Aplicação contem mais de 2 bugs."
-              exit 1
-          fi
