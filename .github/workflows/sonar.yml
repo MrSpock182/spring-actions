@@ -42,6 +42,4 @@ jobs:
           if [ "$NUM_BUGS" -gt 2 ]; then
               echo "Mais de 2 bugs encontrados. O workflow será bloqueado."
               exit 1
-          else
-              echo "Menos ou igual a 2 bugs. O workflow continuará."
           fi
