@@ -39,7 +39,7 @@ jobs:
       - name: Check SonarQube results
         run: |
           DUPLICATED=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions&metricKeys=duplicated_lines_density" | jq -r '.component.measures[0].value')
-          if [ "$DUPLICATED" -gt 3 ]; then
+          if [ "$DUPLICATED" -lt 3 ]; then
               echo "Aplicação com mais de 3% de duplicação de código."
               exit 1
           fi
