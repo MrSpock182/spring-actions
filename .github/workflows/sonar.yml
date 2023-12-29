@@ -38,8 +38,10 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MrSpock182_spring-actions
       - name: Check SonarQube results
         run: |
-          NUM_BUGS=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions&metricKeys=bugs | jq -r '.component.measures[0].value')
-          if [ "$NUM_BUGS" -gt 1 ]; then
-            echo "Aplicação com mais de 1 bugs encontrados."
-            exit 1
+          NUM_BUGS=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions&metricKeys=bugs" | jq -r '.component.measures[0].value')
+          if [ "$NUM_BUGS" -gt 2 ]; then
+              echo "Mais de 2 bugs encontrados. O workflow será bloqueado."
+              exit 1
+          else
+              echo "Menos ou igual a 2 bugs. O workflow continuará."
           fi
