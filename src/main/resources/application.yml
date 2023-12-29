@@ -1,1 +1,2 @@
-
+actions:
+  name: ${APP_NAME}
