@@ -39,7 +39,7 @@ jobs:
       - name: Check SonarQube results
         run: |
           COVER=$(curl -s -u ${{ secrets.SONAR_TOKEN }}: "https://sonarcloud.io/api/measures/component?componentKey=MrSpock182_spring-actions&metricKeys=coverage" | jq -r '.component.measures[0].value')
-          if [ "$COBERTURA" -lt 80 ]; then
+          if (( $(echo "$COBERTURA < 80.0" | bc -l) )); then
             echo "Aplicação com menos de 80% coverage."
             exit 1
           else
