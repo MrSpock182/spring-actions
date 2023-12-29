@@ -1,4 +1,4 @@
-package io.github.mrspock182.actions;
+package io.github.mrspock182.actions.resource;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
