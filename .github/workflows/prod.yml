@@ -38,4 +38,4 @@ jobs:
       - name: Remove docker container
         run: docker rm -f actions
       - name: Run docker container
-        run: docker run -d -p 8080:8080 --name actions mrspock182/actions
+        run: docker run -d -p 8080:8080 -e APP_NAME='${{secrets.APP_NAME}}' --name actions mrspock182/actions
