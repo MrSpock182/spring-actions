@@ -14,6 +14,6 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String getHello() {
-        return "Olá " + name + ", com você esta? Gosteria de realizar um teste";
+        return "Olá " + name + ", com você esta? Tenha um bom dia";
     }
 }
