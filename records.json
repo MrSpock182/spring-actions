@@ -1,0 +1,282 @@
+﻿[
+  {
+    "n": {
+      "identity": 0,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "cpf": "1237",
+        "name": "Olavo",
+        "birth": "2024-01-23"
+      },
+      "elementId": "0"
+    }
+  },
+  {
+    "n": {
+      "identity": 1,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "cpf": "1235",
+        "name": "Garcia",
+        "birth": "2024-01-23"
+      },
+      "elementId": "1"
+    }
+  },
+  {
+    "n": {
+      "identity": 2,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "cpf": "1236",
+        "name": "Joaquim",
+        "birth": "2024-01-23"
+      },
+      "elementId": "2"
+    }
+  },
+  {
+    "n": {
+      "identity": 3,
+      "labels": [
+        "Company"
+      ],
+      "properties": {
+        "name": "Coca-Cola",
+        "cnpj": "123454",
+        "open": "2024-01-23"
+      },
+      "elementId": "3"
+    }
+  },
+  {
+    "n": {
+      "identity": 4,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "cpf": "1241",
+        "name": "Joao",
+        "birth": "2024-01-23"
+      },
+      "elementId": "4"
+    }
+  },
+  {
+    "n": {
+      "identity": 5,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "cpf": "1238",
+        "name": "Francisco",
+        "birth": "2024-01-23"
+      },
+      "elementId": "5"
+    }
+  },
+  {
+    "n": {
+      "identity": 6,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "cpf": "1240",
+        "name": "Paulo",
+        "birth": "2024-01-23"
+      },
+      "elementId": "6"
+    }
+  },
+  {
+    "n": {
+      "identity": 7,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "cpf": "1239",
+        "name": "Pedro",
+        "birth": "2024-01-23"
+      },
+      "elementId": "7"
+    }
+  },
+  {
+    "n": {
+      "identity": 8,
+      "labels": [
+        "Company"
+      ],
+      "properties": {
+        "name": "Lenovo",
+        "cnpj": "123455",
+        "open": "2024-01-23"
+      },
+      "elementId": "8"
+    }
+  },
+  {
+    "n": {
+      "identity": 9,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "cpf": "1242",
+        "name": "Ronaldo",
+        "birth": "2024-01-23"
+      },
+      "elementId": "9"
+    }
+  },
+  {
+    "n": {
+      "identity": 10,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "cpf": "1243",
+        "name": "Cassio",
+        "birth": "2024-01-23"
+      },
+      "elementId": "10"
+    }
+  },
+  {
+    "n": {
+      "identity": 11,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "cpf": "1244",
+        "name": "Leonardo",
+        "birth": "2024-01-23"
+      },
+      "elementId": "11"
+    }
+  },
+  {
+    "n": {
+      "identity": 12,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "cpf": "1245",
+        "name": "Lucio",
+        "birth": "2024-01-23"
+      },
+      "elementId": "12"
+    }
+  },
+  {
+    "n": {
+      "identity": 19,
+      "labels": [
+        "Company"
+      ],
+      "properties": {
+        "name": "Cisp",
+        "cnpj": "123451",
+        "open": "2024-01-23"
+      },
+      "elementId": "19"
+    }
+  },
+  {
+    "n": {
+      "identity": 20,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "cpf": "1231",
+        "name": "Kleber",
+        "birth": "2024-01-23"
+      },
+      "elementId": "20"
+    }
+  },
+  {
+    "n": {
+      "identity": 21,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "cpf": "1233",
+        "name": "Sandro",
+        "birth": "2024-01-23"
+      },
+      "elementId": "21"
+    }
+  },
+  {
+    "n": {
+      "identity": 22,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "cpf": "1234",
+        "name": "Genor",
+        "birth": "2024-01-23"
+      },
+      "elementId": "22"
+    }
+  },
+  {
+    "n": {
+      "identity": 23,
+      "labels": [
+        "Company"
+      ],
+      "properties": {
+        "name": "Itatiba Company",
+        "cnpj": "123453",
+        "open": "2024-01-23"
+      },
+      "elementId": "23"
+    }
+  },
+  {
+    "n": {
+      "identity": 24,
+      "labels": [
+        "Person"
+      ],
+      "properties": {
+        "cpf": "1232",
+        "name": "Marcelo",
+        "birth": "2024-01-23"
+      },
+      "elementId": "24"
+    }
+  },
+  {
+    "n": {
+      "identity": 25,
+      "labels": [
+        "Company"
+      ],
+      "properties": {
+        "name": "Carrefour",
+        "cnpj": "123452",
+        "open": "2024-01-23"
+      },
+      "elementId": "25"
+    }
+  }
+]
