@@ -8,16 +8,19 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout Code
+        id: checkout_code
         uses: actions/checkout@v3
 
       - name: Setup Java
+        id: setup_java
         uses: actions/setup-java@v3
         with:
           distribution: 'corretto'
           java-version: 17
 
-      - name: Set up Maven cache
+      - name: Setup Maven
+        id: setup_maven
         uses: actions/cache@v3
         with:
           path: ~/.m2/repository
@@ -26,14 +29,15 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Build Project
+        id: build_project
         run: mvn clean install -DskipTests
 
-      - name: Extract Maven Project Version
-        id: extract_version
+      - name: Project Version
+        id: project_version
         run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
 
-      - name: Check if Docker tag exists
-        id: check_tag
+      - name: Verify Tag Exists
+        id: verify_tag
         run: |
           TAG_EXISTS=$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/repositories/mrspock182/actions/tags/${{ env.VERSION }})
           if [ $TAG_EXISTS -eq 200 ]; then
@@ -41,17 +45,17 @@ jobs:
             exit 1
           fi
 
-      - name: Build docker image
+      - name: Build Docker Image
         run: docker build -t mrspock182/actions:${{ env.VERSION }} .
 
-      - name: Tag image as latest
+      - name: Tag Image Latest
         run: docker tag mrspock182/actions:${{ env.VERSION }} mrspock182/actions:latest
 
       - name: Login Dockerhub
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
 
-      - name: Push image to Docker Hub
+      - name: Push Image
         run: docker push mrspock182/actions:${{ env.VERSION }}
 
-      - name: Push latest image to Docker Hub
+      - name: Push Image Latest Tag
         run: docker push mrspock182/actions:latest
