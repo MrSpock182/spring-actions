@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.mrspock182</groupId>
     <artifactId>actions</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>actions</name>
     <description>Demo project for Spring Boot</description>
 
