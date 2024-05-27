@@ -42,7 +42,10 @@ jobs:
           fi
 
       - name: Build docker image
-        run: docker build -t mrspock182/actions:${{ env.VERSION }} .
+        run: docker build --build-arg JAR_FILE=actions-${{ env.VERSION }}.jar -t mrspock182/actions:${{ env.VERSION }} .
+
+      - name: Tag image as latest
+        run: docker tag mrspock182/actions:${{ env.VERSION }} mrspock182/actions:latest
 
       - name: Login Dockerhub
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
