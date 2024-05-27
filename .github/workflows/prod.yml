@@ -1,5 +1,4 @@
-name: Build and Deploy to ECR
-
+name: Deploy Application
 on:
   push:
     branches: [ main ]
@@ -11,33 +10,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: 17
-
-      #      - name: Set up Maven cache
-      #        uses: actions/cache@v3
-      #        with:
-      #          path: ~/.m2/repository
-      #          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-      #          restore-keys: |
-      #            ${{ runner.os }}-maven-
-
       - name: Build Project
         run: mvn clean install -DskipTests
-
-      #      - name: Extract Maven Project Version
-      #        id: extract_version
-      #        run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
-
-      - name: Build docker image
-        run: docker build -t mrspock182/actions .
-
       - name: Login Dockerhub
         run: docker login -u ${{secrets.DOCKERHUB_USER}} -p ${{secrets.DOCKERHUB_PASSWORD}}
-
+      - name: Build docker image
+        run: docker build -t mrspock182/actions .
       - name: Push image docker
         run: docker push mrspock182/actions
