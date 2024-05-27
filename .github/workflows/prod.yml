@@ -32,6 +32,15 @@ jobs:
         id: extract_version
         run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
 
+      - name: Check if Docker tag exists
+        id: check_tag
+        run: |
+          TAG_EXISTS=$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/repositories/mrspock182/actions/tags/${{ env.VERSION }})
+          if [ $TAG_EXISTS -eq 200 ]; then
+            echo "Tag ${{ env.VERSION }} already exists. Exiting."
+            exit 1
+          fi
+
       - name: Build docker image
         run: docker build -t mrspock182/actions:${{ env.VERSION }} .
 
