@@ -42,7 +42,7 @@ jobs:
           fi
 
       - name: Build docker image
-        run: docker build --build-arg JAR_FILE=actions-${{ env.VERSION }}.jar -t mrspock182/actions:${{ env.VERSION }} .
+        run: docker build -t mrspock182/actions:${{ env.VERSION }} .
 
       - name: Tag image as latest
         run: docker tag mrspock182/actions:${{ env.VERSION }} mrspock182/actions:latest
@@ -52,3 +52,6 @@ jobs:
 
       - name: Push image to Docker Hub
         run: docker push mrspock182/actions:${{ env.VERSION }}
+
+      - name: Push latest image to Docker Hub
+        run: docker push mrspock182/actions:latest
