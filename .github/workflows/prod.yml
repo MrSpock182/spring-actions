@@ -32,14 +32,14 @@ jobs:
       - name: Project Version
         id: project_version
         run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
-      - name: Verify Tag Exists
-        id: verify_tag
-        run: |
-          TAG_EXISTS=$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/repositories/mrspock182/actions/tags/${{ env.VERSION }})
-          if [ $TAG_EXISTS -eq 200 ]; then
-            echo "Tag ${{ env.VERSION }} already exists."
-            exit 1
-          fi
+#      - name: Verify Tag Exists
+#        id: verify_tag
+#        run: |
+#          TAG_EXISTS=$(curl -s -o /dev/null -w "%{http_code}" https://hub.docker.com/v2/repositories/mrspock182/actions/tags/${{ env.VERSION }})
+#          if [ $TAG_EXISTS -eq 200 ]; then
+#            echo "Tag ${{ env.VERSION }} already exists."
+#            exit 1
+#          fi
 
       - name: Build Docker Image
         id: build_image
