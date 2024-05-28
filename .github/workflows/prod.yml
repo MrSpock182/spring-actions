@@ -69,7 +69,7 @@ jobs:
         id: setup_kubectl
         uses: azure/setup-kubectl@v3
         with:
-          version: v1.21.0
+          version: v1.29.0
 
       - name: Update kubeconfig
         id: update_kubeconfig
