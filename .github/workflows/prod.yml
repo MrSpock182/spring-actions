@@ -78,8 +78,4 @@ jobs:
 
       - name: Deploy EKS
         id: deploy_eks
-        env:
-          API_KEY: ${{ secrets.APP_NAME }}
-        run: |
-          kubectl apply -f k8s/configmap.yaml --validate=false
-          kubectl apply -f k8s/deployment.yaml
+        run: kubectl apply -f k8s/configmap.yaml
