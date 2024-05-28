@@ -70,3 +70,16 @@ jobs:
         uses: azure/setup-kubectl@v3
         with:
           version: v1.21.0
+
+      - name: Update kubeconfig
+        id: update_kubeconfig
+        run: |
+          aws eks update-kubeconfig --name DevCluster --region us-east-1
+
+      - name: Deploy EKS
+        id: deploy_eks
+        env:
+          API_KEY: ${{ secrets.APP_NAME }}
+        run: |
+          kubectl apply -f k8s/configmap.yaml
+          kubectl apply -f k8s/deployment.yaml
