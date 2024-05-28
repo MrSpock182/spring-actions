@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: actions-config
 data:
-  API_KEY: "${APP_NAME}"
+  APP_NAME: "${APP_NAME}"
