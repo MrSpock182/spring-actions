@@ -19,9 +19,3 @@ spec:
           image: mrspock182/actions:latest
           ports:
             - containerPort: 8080
-          env:
-            - name: APP_NAME
-              valueFrom:
-                configMapKeyRef:
-                  name: app-config
-                  key: APP_NAME
