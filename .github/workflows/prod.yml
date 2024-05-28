@@ -11,14 +11,12 @@ jobs:
       - name: Checkout Code
         id: checkout_code
         uses: actions/checkout@v3
-
       - name: Setup Java
         id: setup_java
         uses: actions/setup-java@v3
         with:
           distribution: 'corretto'
           java-version: 17
-
       - name: Setup Maven
         id: setup_maven
         uses: actions/cache@v3
@@ -31,11 +29,9 @@ jobs:
       - name: Build Project
         id: build_project
         run: mvn clean install -DskipTests
-
       - name: Project Version
         id: project_version
         run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
-
       - name: Verify Tag Exists
         id: verify_tag
         run: |
@@ -46,16 +42,31 @@ jobs:
           fi
 
       - name: Build Docker Image
+        id: build_image
         run: docker build -t mrspock182/actions:${{ env.VERSION }} .
-
       - name: Tag Image Latest
+        id: tag_image
         run: docker tag mrspock182/actions:${{ env.VERSION }} mrspock182/actions:latest
-
       - name: Login Dockerhub
+        id: login_dockerhub
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
-
       - name: Push Image
+        id: push_image
         run: docker push mrspock182/actions:${{ env.VERSION }}
-
       - name: Push Image Latest Tag
+        id: push_latest
         run: docker push mrspock182/actions:latest
+
+      - name: AWS Login
+        id: aws_login
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Setup kubectl
+        id: setup_kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: v1.21.0
